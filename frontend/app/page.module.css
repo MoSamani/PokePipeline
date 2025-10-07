@@ -1,0 +1,73 @@
+.main {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.input {
+  margin-left: 6px;
+  width: 100px;
+}
+
+.input--small {
+  width: 80px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: crimson;
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.name {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.clickable {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chev {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.url {
+  margin-top: 8px;
+  word-break: break-all;
+}

@@ -1,0 +1,78 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/page.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+.page_main__nw1Wk {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page_controls__AOfq_ {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.page_input__lx_gt {
+  margin-left: 6px;
+  width: 100px;
+}
+
+.page_input--small__9EEix {
+  width: 80px;
+}
+
+.page_btn__hMGYV {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.page_btn__hMGYV:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.page_error__JBrsB {
+  color: crimson;
+}
+
+.page_list__YP8g5 {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-gap: 10px;
+  gap: 10px;
+}
+
+.page_card__Cf__u {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.page_name__o7Dx1 {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.page_clickable__oP63I {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page_chev__O5GFD {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.page_url__WOulY {
+  margin-top: 8px;
+  word-break: break-all;
+}
+
