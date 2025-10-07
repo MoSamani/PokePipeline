@@ -20,7 +20,7 @@ export default function HomePage() {
   const [rows, setRows] = useState<PRow[]>([])
   const [loading, setLoading] = useState(false)
   const [ingesting, setIngesting] = useState(false)
-  const [limit, setLimit] = useState(25)
+  const [limit, setLimit] = useState(10)
   const [offset, setOffset] = useState(0)
   const [err, setErr] = useState<string | null>(null)
 
