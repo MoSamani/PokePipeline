@@ -124,8 +124,7 @@ export default function HomePage() {
 
   return (
     <main className={styles.main}>
-      <h1>Pokémon API</h1>
-
+      <h1 className={styles.title}>Pokémon API</h1>
       <div className={styles.controls}>
         <label>
           Limit:
