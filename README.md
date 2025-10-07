@@ -22,12 +22,19 @@ services:
 ```
 
 3. Start (Dev)
+   Build & Run:
 
 ```
 docker compose -f docker-compose.dev.yml up --build
 ```
 
-Satrt(Ports):
+Just start:
+
+```
+docker compose -f docker-compose.dev.yml up
+```
+
+Ports:
 
 - Frontend: http://localhost:3000
 - PostgreSQL: port 5432 (in Docker)
