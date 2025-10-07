@@ -4,8 +4,17 @@ import styles from './page.module.css'
 
 // Define PRow as a dictionary for the name and URL to save it
 type PRow = { name: string; url?: string }
+// Define PDetail as a dictionary for the Pokemon features and type of them
+type PDetail = {
+  types?: string
+  abilities?: string
+  base_experience?: number
+  height_m?: number
+  weight_kg?: number
+  sprite_url?: string | null
+}
 
-// Define HomePage component to render Pokemon names and URL.
+// Define HomePage component to render Pokemon names, URL and Features.
 export default function HomePage() {
   // Local state for managing data, loading and errors
   const [rows, setRows] = useState<PRow[]>([])
@@ -15,9 +24,36 @@ export default function HomePage() {
   const [offset, setOffset] = useState(0)
   const [err, setErr] = useState<string | null>(null)
 
+  // Toggle the detail view for a specific Pokémon
+  // If the detail is already open, close it
+  // If not yet loaded, fetch detailed data from the API and store it in state
+  // Then open the detail view
+  const [details, setDetails] = useState<Record<string, PDetail>>({})
+  const [openDetail, setOpenDetail] = useState<Record<string, boolean>>({})
+  const toggleDetail = async (name: string) => {
+    if (openDetail[name]) {
+      setOpenDetail((prev) => ({ ...prev, [name]: !prev[name] }))
+      return
+    }
+    if (!details[name]) {
+      try {
+        const res = await fetch(
+          `/api/pokemon/detail?name=${encodeURIComponent(name)}`
+        )
+        if (!res.ok) throw new Error(`GET /api/pokemon/detail → ${res.status}`)
+        const d: PDetail = await res.json()
+        setDetails((prev) => ({ ...prev, [name]: d }))
+      } catch (e: any) {
+        setErr(e.message)
+        return
+      }
+    }
+    setOpenDetail((prev) => ({ ...prev, [name]: true }))
+  }
+
   // Map of name → expanded (open) state
-  const [open, setOpen] = useState<Record<string, boolean>>({})
   // Save/Cache URLs if it's  not already in the dataset
+  const [open, setOpen] = useState<Record<string, boolean>>({})
   const [urlCache, setUrlCache] = useState<Record<string, string>>({})
 
   // Fetch up to 10 items
@@ -127,17 +163,62 @@ export default function HomePage() {
         {rows.map((r) => {
           const url = r.url ?? urlCache[r.name]
           const isOpen = !!open[r.name]
+          const detail = details?.[r.name]
+          const isDetailOpen = !!openDetail?.[r.name]
+
           return (
             <li key={r.name} className={styles.card}>
-              <div className={styles.clickable} onClick={() => toggleRow(r)}>
-                <div className={styles.name}>{r.name}</div>
-                <span className={styles.chev}>{isOpen ? '▾' : '▸'}</span>
+              <div className={styles.row}>
+                <div className={styles.clickable} onClick={() => toggleRow(r)}>
+                  <div className={styles.name}>{r.name}</div>
+                  <span className={styles.chev}>{isOpen ? '▾' : '▸'}</span>
+                </div>
+
+                <button
+                  className={styles.linkBtn}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleDetail(r.name)
+                  }}
+                >
+                  More Info
+                </button>
               </div>
+
               {isOpen && url && (
                 <div className={styles.url}>
-                  <a href={url} target="_blank">
+                  <a href={url} target="_blank" rel="noopener noreferrer">
                     {url}
                   </a>
+                </div>
+              )}
+
+              {isDetailOpen && detail && (
+                <div className={styles.detailBox}>
+                  {detail.sprite_url && (
+                    <img
+                      className={styles.sprite}
+                      src={detail.sprite_url}
+                      alt={r.name}
+                    />
+                  )}
+                  <div>
+                    <b>Types:</b> {detail.types || '—'}
+                  </div>
+                  <div>
+                    <b>Abilities:</b> {detail.abilities || '—'}
+                  </div>
+                  <div>
+                    <b>Base XP:</b> {detail.base_experience ?? '—'}
+                  </div>
+                  <div>
+                    <b>Height:</b>{' '}
+                    {detail.height_m != null ? `${detail.height_m} m` : '—'}
+                  </div>
+                  <div>
+                    <b>Weight:</b>{' '}
+                    {detail.weight_kg != null ? `${detail.weight_kg} kg` : '—'}
+                  </div>
                 </div>
               )}
             </li>

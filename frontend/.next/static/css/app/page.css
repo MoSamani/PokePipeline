@@ -76,3 +76,31 @@
   word-break: break-all;
 }
 
+.page_row__qDqJa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page_linkBtn__OC_G6 {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.page_detailBox__5GqIj {
+  margin-top: 8px;
+  display: grid;
+  grid-gap: 4px;
+  gap: 4px;
+}
+
+.page_sprite__H1BYu {
+  margin-top: 6px;
+  width: 72px;
+  height: 72px;
+  image-rendering: pixelated;
+}
+

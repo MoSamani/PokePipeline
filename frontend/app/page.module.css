@@ -71,3 +71,30 @@
   margin-top: 8px;
   word-break: break-all;
 }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.linkBtn {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.detailBox {
+  margin-top: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.sprite {
+  margin-top: 6px;
+  width: 72px;
+  height: 72px;
+  image-rendering: pixelated;
+}
