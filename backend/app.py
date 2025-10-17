@@ -2,8 +2,8 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 import models  
 from db import init_db, SessionLocal
-from source_client import fetch_pokemon_batch
-from repository import upsert_pokemon, list_pokemon
+from source_client import fetch_pokemon_batch, fetch_pokemon_detail_by_url
+from repository import upsert_pokemon, list_pokemon, get_pokemon_by_name, get_detail_by_pid, upsert_pokemon_detail
 from sqlalchemy import select
 from models import Pokemon
 
@@ -56,3 +56,34 @@ async def get_pokemon_url(name: str = Query(..., min_length=1)):
         if not row:
             raise HTTPException(status_code=404, detail="Pokémon nicht gefunden")
         return {"name": row.name, "url": row.url}
+
+# Define an endpoint to retrieve detailed information about a specific Pokémon by name
+# If details are not found in the local database, they are fetched from the external PokeAPI,
+# stored (upserted) in the database, and then returned
+# Converts height (from decimetres to metres) and weight (from hectograms to kilograms)
+@app.get("/api/pokemon/detail")
+async def pokemon_detail(name: str = Query(..., min_length=1)):
+    async with SessionLocal() as session:
+        p = await get_pokemon_by_name(session, name)
+        if not p:
+            raise HTTPException(status_code=404, detail="Pokemon not found")
+
+        d = await get_detail_by_pid(session, p.id)
+        if not d:
+            detail_data = await fetch_pokemon_detail_by_url(p.url)
+            await upsert_pokemon_detail(session, p.id, detail_data)
+            await session.commit()
+            d = await get_detail_by_pid(session, p.id)
+
+        height_m = d.height_dm / 10 if d.height_dm is not None else None
+        weight_kg = d.weight_hg / 10 if d.weight_hg is not None else None
+
+        return {
+            "name": p.name,
+            "types": d.types,
+            "abilities": d.abilities,
+            "base_experience": d.base_experience,
+            "height_m": height_m,
+            "weight_kg": weight_kg,
+            "sprite_url": d.sprite_url,
+        }
