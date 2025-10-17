@@ -31,6 +31,8 @@
 .page_input__lx_gt {
   margin-left: 0.375rem;
   width: 6.25rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .page_input--small__9EEix {
@@ -38,6 +40,7 @@
 }
 
 .page_btn__hMGYV {
+  font: inherit;
   padding: 0.5rem 0.75rem;
   border: 0.0625rem solid #ccc;
   border-radius: 0.5rem;
@@ -46,6 +49,7 @@
 }
 
 .page_btn__hMGYV:disabled {
+  font: inherit;
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -97,6 +101,7 @@
 }
 
 .page_linkBtn__OC_G6 {
+  font: inherit;
   padding: 0.375rem 0.625rem;
   border: 0.0625rem solid #ccc;
   border-radius: 0.5rem;

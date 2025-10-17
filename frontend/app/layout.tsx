@@ -1,4 +1,11 @@
 import './globals.css'
+import { Roboto } from 'next/font/google'
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'], // wähle, was du brauchst
+  display: 'swap',
+})
 
 export const metadata = {
   title: 'Next.js',
@@ -11,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={roboto.className}>
       <body>{children}</body>
     </html>
   )

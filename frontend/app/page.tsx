@@ -61,7 +61,7 @@ export default function HomePage() {
     setLoading(true)
     setErr(null)
     try {
-      const r = await fetch('/api/pokemon?limit=10')
+      const r = await fetch(`/api/pokemon?limit=${limit}`)
       if (!r.ok) throw new Error(`GET /api/pokemon → ${r.status}`)
       const data: PRow[] = await r.json()
       setRows(data)
