@@ -2,6 +2,14 @@
 
 Fetch Pokémon from the PokeAPI, store name & url in PostgreSQL, and display them in a Next.js UI. More tables/fields can be added later.
 
+## 🧩 Abstract
+
+**Poké Pipeline** is a containerized full-stack project built with **Next.js**, **FastAPI**, and **Docker** that demonstrates modern data-fetching, processing, and visualization workflows.  
+The application retrieves data from the public Pokémon API, stores structured entities in a **PostgreSQL** database, and provides a responsive, interactive interface to explore Pokémon data.  
+The **frontend**, powered by Next.js and **CSS Modules**, ensures a modular and performant user experience.  
+The **backend**, implemented with **FastAPI** and **SQLAlchemy 2.x (async)**, handles data ingestion and asynchronous communication with external APIs.  
+With **Docker Compose**, the entire environment can be reproduced and started consistently across systems.
+
 # **Stack:**
 
 - Frontend: Next.js (App Router), CSS Modules
